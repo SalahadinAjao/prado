@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.prado.dao.UserDao">
+    <resultMap id="userMap" type="org.prado.entity.UserEntity">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="passWord" column="pass_word"/>
+        <result property="teleNumber" column="tele_number"/>
+        <result property="estabTime" column="estab_time"/>
+    </resultMap>
+
+    <insert id="save" parameterType="org.prado.entity.UserEntity">
+        insert into userInfo(
+        `id`,
+        `user_name`,
+        `pass_word`,
+        `tele_number`,
+        `estab_time`
+        )values (
+        #{id},
+        #{userName},
+        #{passWord},
+        #{teleNumber},
+        #{estabTime}
+        )
+    </insert>
+
+</mapper>
