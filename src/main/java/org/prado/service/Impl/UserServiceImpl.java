@@ -5,6 +5,9 @@ import org.prado.entity.UserVo;
 import org.prado.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author: houlintao
@@ -17,9 +20,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout = 3)
     public int save(UserVo userVo) {
-        userDao.save(userVo);
-        return 0;
+       return userDao.save(userVo);
     }
 
     @Override

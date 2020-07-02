@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.prado.dao.UserLevelDao">
+    <resultMap id="userLevelMap" type="org.prado.entity.UserLevelEntity">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <insert id="save" parameterType="org.prado.entity.UserLevelEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into nideshop_user_level
+		(
+			`name`,
+			`description`
+		)
+		values
+		(
+			#{name},
+			#{description}
+		)
+	</insert>
+</mapper>
