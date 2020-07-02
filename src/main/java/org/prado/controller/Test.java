@@ -3,6 +3,8 @@ package org.prado.controller;
 import org.prado.common.BaseController;
 import org.prado.common.Md5;
 import org.prado.dao.UserDao;
+import org.prado.dao.UserLevelDao;
+import org.prado.entity.UserLevelEntity;
 import org.prado.entity.UserVo;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -22,13 +24,21 @@ import java.util.Date;
 public class Test {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
-        UserDao userDao = applicationContext.getBean(UserDao.class);
+        UserLevelDao userLevelDao = applicationContext.getBean(UserLevelDao.class);
 
-        /*int total = userDao.queryTotal();
+        UserLevelEntity levelEntity = new UserLevelEntity();
+        levelEntity.setId(6);
+        levelEntity.setName("超级VIP");
+        levelEntity.setDescription("10000000");
+
+        userLevelDao.save(levelEntity);
+        /* UserDao userDao = applicationContext.getBean(UserDao.class);
+
+        *//*int total = userDao.queryTotal();
         System.out.println("数据库中查出用户记录" + total+"条");
 
         UserVo userVo = userDao.queryByMobile("13954036725");
-        System.out.println("用户名 = " + userVo.getUsername()+"\n"+"密码 = "+userVo.getPassword());*/
+        System.out.println("用户名 = " + userVo.getUsername()+"\n"+"密码 = "+userVo.getPassword());*//*
         UserVo userVo = new UserVo();
         userVo.setUserId(999L);
         userVo.setUsername("没药");
@@ -72,7 +82,7 @@ public class Test {
 
 
         userDao.save(userVo);
-        System.out.println("数据插入成功");
+        System.out.println("数据插入成功");*/
     }
 
 }

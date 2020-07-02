@@ -9,6 +9,9 @@ import org.prado.entity.UserVo;
  * @Version 1.0
  */
 public interface UserService {
+
+    int save(String mobile,String password);
+
     int save(UserVo userVo);
 
     int queryTotal();
