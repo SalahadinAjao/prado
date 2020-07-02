@@ -1,6 +1,6 @@
 package org.prado.service;
 
-import org.prado.entity.UserEntity;
+import org.prado.entity.UserVo;
 
 /**
  * @Author: houlintao
@@ -9,5 +9,9 @@ import org.prado.entity.UserEntity;
  * @Version 1.0
  */
 public interface UserService {
-    int save(UserEntity entity);
+    int save(UserVo userVo);
+
+    int queryTotal();
+
+    UserVo queryByMobile(String mobile);
 }

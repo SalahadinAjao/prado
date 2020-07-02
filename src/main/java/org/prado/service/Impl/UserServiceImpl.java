@@ -1,7 +1,7 @@
 package org.prado.service.Impl;
 
 import org.prado.dao.UserDao;
-import org.prado.entity.UserEntity;
+import org.prado.entity.UserVo;
 import org.prado.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,18 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
     @Override
-    public int save(UserEntity entity) {
-        userDao.save(entity);
+    public int save(UserVo userVo) {
+        userDao.save(userVo);
         return 0;
+    }
+
+    @Override
+    public int queryTotal() {
+        return userDao.queryTotal();
+    }
+
+    @Override
+    public UserVo queryByMobile(String mobile) {
+        return userDao.queryByMobile(mobile);
     }
 }

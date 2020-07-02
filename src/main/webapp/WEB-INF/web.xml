@@ -4,4 +4,30 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
+  <context-param>
+    <!--在这里配置的是springIoc父容器-->
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring/spring-mybatis.xml</param-value>
+  </context-param>
+  
+  <!--配置ContextLoaderListener监听器以初始化Spring Ioc容器-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <!--配置SpringMvc容器，这个是spring容器的子容器，是围绕dispatcherServlet的，springmvc框架会根据下面的
+  servlet-name的值找到对应的文件作为配置文件载入web工程-->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--让dispatcher在服务器启动的时候就初始化-->
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
 </web-app>

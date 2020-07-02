@@ -38,7 +38,7 @@
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource"/>
     <!--<property name="mapperLocations" value="classpath:org/prado/mapper/*.xml"/>-->
-    <property name="configLocation" value="mybatisConfig.xml"/>
+    <property name="configLocation" value="classpath:mybatisConfig.xml"/>
     <property name="mapperLocations" value="classpath:org/prado/dao/*.xml"/>
 </bean>
 
@@ -49,5 +49,8 @@
     </bean>
 
     <!--暂时未加入事物管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
 </beans>

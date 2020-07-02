@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.prado.dao.UserDao">
-    <resultMap id="userMap" type="org.prado.entity.UserEntity">
-        <result property="id" column="id"/>
-        <result property="userName" column="user_name"/>
-        <result property="passWord" column="pass_word"/>
-        <result property="teleNumber" column="tele_number"/>
-        <result property="estabTime" column="estab_time"/>
+    <resultMap id="userMap" type="org.prado.entity.UserVo">
+        <result property="userId" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="register_time" column="register_time"/>
+        <result property="last_login_time" column="last_login_time"/>
+        <result property="last_login_ip" column="last_login_ip"/>
+        <result property="user_level_id" column="user_level_id"/>
+        <result property="nickname" column="nickname"/>
+        <result property="mobile" column="mobile"/>
+        <result property="register_ip" column="register_ip"/>
+        <result property="avatar" column="avatar"/>
+        <result property="weixin_openid" column="weixin_openid"/>
     </resultMap>
 
-    <insert id="save" parameterType="org.prado.entity.UserEntity">
-        insert into userInfo(
-        `id`,
-        `user_name`,
-        `pass_word`,
-        `tele_number`,
-        `estab_time`
+    <insert id="save" parameterType="org.prado.entity.UserVo">
+        insert into nideshop_user(
+        `username`,
+			`password`,
+			`gender`,
+			`birthday`,
+			`register_time`,
+			`last_login_time`,
+			`last_login_ip`,
+			`user_level_id`,
+			`nickname`,
+			`mobile`,
+			`register_ip`,
+			`avatar`,
+			`weixin_openid`
         )values (
-        #{id},
-        #{userName},
-        #{passWord},
-        #{teleNumber},
-        #{estabTime}
+        #{username},
+			#{password},
+			#{gender},
+			#{birthday},
+			#{register_time},
+			#{last_login_time},
+			#{last_login_ip},
+			#{user_level_id},
+			#{nickname},
+			#{mobile},
+			#{register_ip},
+			#{avatar},
+			#{weixin_openid}
         )
     </insert>
+
+	<select id="queryTotal" resultType="int">
+		select count(*) from nideshop_user
+	</select>
+
+	<select id="queryByMobile" resultMap="userMap">
+		select * from nideshop_user where `mobile` = #{mobile}
+	</select>
 
 </mapper>

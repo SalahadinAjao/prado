@@ -1,7 +1,10 @@
 package org.prado.dao;
 
-import org.prado.entity.UserEntity;
+import org.prado.entity.UserVo;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author: houlintao
@@ -12,5 +15,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDao {
-     int save(UserEntity entity);
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout = 3)
+    public int save(UserVo userVo);
+
+    public int queryTotal();
+
+    public UserVo queryByMobile(String mobile);
 }
