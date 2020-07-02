@@ -1,6 +1,7 @@
 package org.prado.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.code.kaptcha.Producer;
 import org.prado.common.BaseController;
 import org.prado.common.Md5;
 import org.prado.entity.UserVo;
