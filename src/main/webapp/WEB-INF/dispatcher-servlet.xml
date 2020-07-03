@@ -14,6 +14,14 @@
        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
     <mvc:annotation-driven />
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <bean class="org.prado.interceptors.TokenAuthorizationInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <context:component-scan base-package="org.prado.controller"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

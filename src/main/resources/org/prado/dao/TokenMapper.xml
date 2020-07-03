@@ -37,4 +37,8 @@
         select * from tb_token where user_id = #{value}
     </select>
 
+    <select id="queryByToken" resultMap="tokenMap">
+        select * from tb_token where token = #{value}
+    </select>
+
 </mapper>

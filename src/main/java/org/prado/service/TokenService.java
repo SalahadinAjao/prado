@@ -19,4 +19,6 @@ public interface TokenService {
     TokenEntity queryByUserId(long userId);
 
     void update(TokenEntity entity);
+
+    TokenEntity queryByToken(String token);
 }

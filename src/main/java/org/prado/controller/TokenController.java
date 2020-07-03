@@ -1,6 +1,7 @@
 package org.prado.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import org.prado.annotation.SkipAuth;
 import org.prado.common.BaseController;
 import org.prado.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

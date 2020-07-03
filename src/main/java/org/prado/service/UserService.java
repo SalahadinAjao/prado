@@ -1,5 +1,6 @@
 package org.prado.service;
 
+import org.prado.entity.TokenEntity;
 import org.prado.entity.UserVo;
 
 /**
@@ -17,4 +18,5 @@ public interface UserService {
     int queryTotal();
 
     UserVo queryByMobile(String mobile);
+
 }

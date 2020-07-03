@@ -82,8 +82,15 @@ public class TokenServiceImpl implements TokenService {
        return tokenDao.queryByUserId(userId);
     }
 
+
+
     @Override
     public void update(TokenEntity entity) {
          tokenDao.update(entity);
+    }
+
+    @Override
+    public TokenEntity queryByToken(String token) {
+        return tokenDao.queryByToken(token);
     }
 }
