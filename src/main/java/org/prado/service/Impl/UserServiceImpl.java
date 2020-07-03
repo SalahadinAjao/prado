@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public int save(UserVo userVo) {
        return userDao.save(userVo);
     }
+
     @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,timeout = 3)
     public int save(String mobile,String password){
         UserVo userVo = new UserVo();

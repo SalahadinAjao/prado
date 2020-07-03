@@ -2,8 +2,10 @@ package org.prado.controller;
 
 import org.prado.common.BaseController;
 import org.prado.common.Md5;
+import org.prado.dao.TokenDao;
 import org.prado.dao.UserDao;
 import org.prado.dao.UserLevelDao;
+import org.prado.entity.TokenEntity;
 import org.prado.entity.UserLevelEntity;
 import org.prado.entity.UserVo;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,14 +26,18 @@ import java.util.Date;
 public class Test {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
-        UserLevelDao userLevelDao = applicationContext.getBean(UserLevelDao.class);
+        TokenDao tokenDao = applicationContext.getBean(TokenDao.class);
 
-        UserLevelEntity levelEntity = new UserLevelEntity();
+        TokenEntity tokenEntity = tokenDao.queryByUserId(31L);
+        System.out.println("userId = " + tokenEntity.getUserId()+"\n"+"token = "+tokenEntity.getToken());
+       // tokenDao.save(tokenEntity);
+
+        /*UserLevelEntity levelEntity = new UserLevelEntity();
         levelEntity.setId(6);
         levelEntity.setName("超级VIP");
         levelEntity.setDescription("10000000");
 
-        userLevelDao.save(levelEntity);
+        userLevelDao.save(levelEntity);*/
         /* UserDao userDao = applicationContext.getBean(UserDao.class);
 
         *//*int total = userDao.queryTotal();
