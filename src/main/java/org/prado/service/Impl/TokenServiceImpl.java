@@ -39,7 +39,7 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Map<String, Object> createToken(long userId) {
         //使用随机数生成一个token
-        String token = CharTool.getRandomNumStr(32);
+        String token = CharTool.getRandomNumStr(532);
         Date nowDate = new Date();
         //设置token过期时间
         Date expireDate = new Date(nowDate.getTime() + EXPIRE * 1000);
@@ -71,8 +71,8 @@ public class TokenServiceImpl implements TokenService {
         String format1 = format.format(expire);
 
         Map<String, Object> hashMap = new HashMap<>();
-        hashMap.put("token",tokenEntity);
-        hashMap.put("expireTime",format1);
+        hashMap.put("token",tokenEntity.getToken());
+       // hashMap.put("expireTime",format1);
         return hashMap;
     }
 

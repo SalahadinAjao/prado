@@ -17,7 +17,7 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/**"/>
             <bean class="org.prado.interceptors.TokenAuthorizationInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

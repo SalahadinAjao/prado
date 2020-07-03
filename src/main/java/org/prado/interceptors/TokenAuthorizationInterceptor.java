@@ -55,12 +55,15 @@ public class TokenAuthorizationInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.isBlank(token)){
             //如果header中内有token，则从请求参数获取
             token = request.getParameter(LOGIN_TOKEN_KEY);
+            System.out.println("本次请求客户端的token = " + token);
         }
         if (StringUtils.isBlank(token)){
            throw  new ApiRRException("请登录",401);
         }
         //如果token不为null，则通过token属性查询到Token实体
         TokenEntity tokenEntity = tokenService.queryByToken(token);
+
+        System.out.println("token="+tokenEntity.getToken());
 
         if (tokenEntity == null || tokenEntity.getExpireTime().getTime()<System.currentTimeMillis()){
             throw  new ApiRRException("token失效，请重新登录",402);

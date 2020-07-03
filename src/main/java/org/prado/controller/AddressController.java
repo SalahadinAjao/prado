@@ -52,4 +52,12 @@ public class AddressController extends BaseController {
 
         return toResponsSuccess("Sucess");
     }
+
+   /* *//**
+     * 获取用户的收货地址
+     *//*
+    @PostMapping("/addresslist")
+    public Object getUserAddressList(){
+
+    }*/
 }

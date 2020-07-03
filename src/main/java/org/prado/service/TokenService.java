@@ -1,5 +1,6 @@
 package org.prado.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.prado.entity.TokenEntity;
 
 import java.util.Map;
@@ -20,5 +21,5 @@ public interface TokenService {
 
     void update(TokenEntity entity);
 
-    TokenEntity queryByToken(String token);
+    TokenEntity queryByToken(@Param("token") String token);
 }

@@ -28,7 +28,8 @@ public class Test {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
         TokenDao tokenDao = applicationContext.getBean(TokenDao.class);
 
-        TokenEntity tokenEntity = tokenDao.queryByUserId(31L);
+        //TokenEntity tokenEntity = tokenDao.queryByUserId(31L);
+        TokenEntity tokenEntity = tokenDao.queryByToken("46926320572772222612754209989421");
         System.out.println("userId = " + tokenEntity.getUserId()+"\n"+"token = "+tokenEntity.getToken());
        // tokenDao.save(tokenEntity);
 

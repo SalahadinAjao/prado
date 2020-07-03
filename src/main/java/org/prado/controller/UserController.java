@@ -2,6 +2,7 @@ package org.prado.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.code.kaptcha.Producer;
+import org.prado.annotation.SkipAuth;
 import org.prado.common.BaseController;
 import org.prado.common.Md5;
 import org.prado.entity.UserVo;
@@ -31,6 +32,7 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    //@SkipAuth
     @PostMapping("/save")
     @ResponseBody
     public Object saveUser() throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -83,7 +85,7 @@ public class UserController extends BaseController {
 
         return toResponsSuccess("Congratulations! 新用户注册成功！");
     }
-    @PostMapping("total")
+    @PostMapping("/total")
     @ResponseBody
     public Object queryTotal(){
        return userService.queryTotal();
