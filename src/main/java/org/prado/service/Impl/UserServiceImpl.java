@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
     public UserVo queryByMobile(String mobile) {
         return userDao.queryByMobile(mobile);
     }
+
+    @Override
+    public UserVo queryObject(Long userId) {
+       return userDao.queryObject(userId);
+    }
 }

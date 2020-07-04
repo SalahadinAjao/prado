@@ -31,7 +31,7 @@ public class TokenAuthorizationInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        System.out.println("执行了拦截器的preHandle方法 "+"\n"+"request = " + request);
+        //System.out.println("执行了拦截器的preHandle方法 "+"\n"+"request = " + request);
 
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
@@ -63,12 +63,10 @@ public class TokenAuthorizationInterceptor extends HandlerInterceptorAdapter {
         //如果token不为null，则通过token属性查询到Token实体
         TokenEntity tokenEntity = tokenService.queryByToken(token);
 
-        System.out.println("token="+tokenEntity.getToken());
-
         if (tokenEntity == null || tokenEntity.getExpireTime().getTime()<System.currentTimeMillis()){
             throw  new ApiRRException("token失效，请重新登录",402);
         }
-        //设置userId到request里，后续根据userId，获取用户信息
+        //设置userId到request里，以LOGIN_USER_KEY 作为key，以对应的userId值为value，后续根据userId，获取用户信息
         request.setAttribute(LOGIN_USER_KEY, tokenEntity.getUserId());
         return true;
     }

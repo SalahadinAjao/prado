@@ -2,9 +2,11 @@ package org.prado.controller;
 
 import org.prado.common.BaseController;
 import org.prado.common.Md5;
+import org.prado.dao.AddressDao;
 import org.prado.dao.TokenDao;
 import org.prado.dao.UserDao;
 import org.prado.dao.UserLevelDao;
+import org.prado.entity.AddressEntity;
 import org.prado.entity.TokenEntity;
 import org.prado.entity.UserLevelEntity;
 import org.prado.entity.UserVo;
@@ -16,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: houlintao
@@ -26,12 +29,35 @@ import java.util.Date;
 public class Test {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
-        TokenDao tokenDao = applicationContext.getBean(TokenDao.class);
+        AddressDao addressDao = applicationContext.getBean(AddressDao.class);
+        int total = addressDao.queryTotal();
+        System.out.println("total = " + total+"----------------------"+"\n");
+        /*AddressEntity entity = addressDao.queryObject(14);
+        System.out.println("userName = " + entity.getUserName());
 
-        //TokenEntity tokenEntity = tokenDao.queryByUserId(31L);
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setUserName("燕十三");
+        addressEntity.setUserId(1L);
+        addressEntity.setNationalCode("001");
+        addressEntity.setProvinceName("浙江省");
+        addressEntity.setCityName("嘉兴市");
+        addressEntity.setCountyName("湖州区");*/
+
+       // addressDao.save(addressEntity);
+        Integer[] integers = new Integer[5];
+        List<Integer> list = Arrays.asList(integers);
+        list.add(5,0);
+        list.add(6,1);
+        list.add(7,2);
+        list.add(8,3);
+        Object[] array = list.toArray();
+        addressDao.deleteBatch(array);
+
+
+       /* //TokenEntity tokenEntity = tokenDao.queryByUserId(31L);
         TokenEntity tokenEntity = tokenDao.queryByToken("46926320572772222612754209989421");
         System.out.println("userId = " + tokenEntity.getUserId()+"\n"+"token = "+tokenEntity.getToken());
-       // tokenDao.save(tokenEntity);
+       // tokenDao.save(tokenEntity);*/
 
         /*UserLevelEntity levelEntity = new UserLevelEntity();
         levelEntity.setId(6);

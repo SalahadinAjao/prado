@@ -35,6 +35,7 @@ public class AddressEntity implements Serializable {
     //地址全称
     private String full_region;
 
+
     public Long getId() {
         return id;
     }

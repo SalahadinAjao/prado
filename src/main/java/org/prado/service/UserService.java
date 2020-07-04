@@ -19,4 +19,6 @@ public interface UserService {
 
     UserVo queryByMobile(String mobile);
 
+    UserVo queryObject(Long userId);
+
 }

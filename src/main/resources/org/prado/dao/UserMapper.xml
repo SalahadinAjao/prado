@@ -58,4 +58,8 @@
 		select * from nideshop_user where `mobile` = #{mobile}
 	</select>
 
+	<select id="queryObject" resultMap="userMap">
+		select * from nideshop_user where id = #{userId}
+	</select>
+
 </mapper>

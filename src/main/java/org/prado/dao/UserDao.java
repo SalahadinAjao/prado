@@ -1,5 +1,6 @@
 package org.prado.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.prado.entity.UserVo;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
@@ -21,4 +22,6 @@ public interface UserDao {
     public int queryTotal();
 
     public UserVo queryByMobile(String mobile);
+
+    public UserVo queryObject(@Param("userId") Long userId);
 }

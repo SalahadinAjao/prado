@@ -17,10 +17,20 @@
     <!--拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
+            <!--使用/**让前端访问所有api都需要被拦截授权，除非有skipAuth注解的方法-->
             <mvc:mapping path="/**"/>
             <bean class="org.prado.interceptors.TokenAuthorizationInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
+
+    <!--入参解析器-->
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean id="userResolver" class="org.prado.resolvers.CurrentLoginUserHandlerMethodArgumentResolver">
+                <property name="userService" ref="userServiceImpl"/>
+            </bean>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 
     <context:component-scan base-package="org.prado.controller"/>
 

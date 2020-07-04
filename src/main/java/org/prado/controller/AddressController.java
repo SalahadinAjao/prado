@@ -1,8 +1,10 @@
 package org.prado.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import org.prado.annotation.CurrentLoginUser;
 import org.prado.common.BaseController;
 import org.prado.entity.AddressEntity;
+import org.prado.entity.UserVo;
 import org.prado.service.AddressService;
 import org.prado.tools.CharTool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,41 +25,51 @@ public class AddressController extends BaseController {
     private AddressService addressService;
 
     @PostMapping("/save")
-    public Object saveAddress(String username,String password){
+    public Object saveAddress(@CurrentLoginUser UserVo loginUser){
         JSONObject jsonRequest = getJsonRequest();
-        String userName = jsonRequest.getString("userName");
-        String teleNumber = jsonRequest.getString("teleNumber");
-        String postalCode = jsonRequest.getString("postalCode");
-        String nationalCode = jsonRequest.getString("nationalCode");
-        String provinceName = jsonRequest.getString("provinceName");
-        String cityName = jsonRequest.getString("cityName");
-        String countyName = jsonRequest.getString("countyName");
-        String detailInfo = jsonRequest.getString("detailInfo");
-
-        //使用随机字符串模拟用户id
-        String randomNumStr = CharTool.getRandomNumStr(4);
 
         AddressEntity addressEntity = new AddressEntity();
-        addressEntity.setUserId(Long.parseLong(randomNumStr));
-        addressEntity.setUserName(userName);
-        addressEntity.setTelNumber(teleNumber);
-        addressEntity.setPostalCode(postalCode);
-        addressEntity.setNationalCode(nationalCode);
-        addressEntity.setProvinceName(provinceName);
-        addressEntity.setCityName(cityName);
-        addressEntity.setCountyName(countyName);
-        addressEntity.setDetailInfo(detailInfo);
+        if (jsonRequest != null) {
+            addressEntity.setId(jsonRequest.getLong("id"));
+            addressEntity.setUserId(loginUser.getUserId());
 
-        addressService.save(addressEntity);
+            System.out.println("userId = " + loginUser.getUserId());
 
-        return toResponsSuccess("Sucess");
+            addressEntity.setUserName(jsonRequest.getString("userName"));
+            addressEntity.setPostalCode(jsonRequest.getString("postalCode"));
+            addressEntity.setProvinceName(jsonRequest.getString("provinceName"));
+            addressEntity.setCityName(jsonRequest.getString("cityName"));
+            addressEntity.setCountyName(jsonRequest.getString("countyName"));
+            addressEntity.setDetailInfo(jsonRequest.getString("detailInfo"));
+            addressEntity.setNationalCode(jsonRequest.getString("nationalCode"));
+            addressEntity.setTelNumber(jsonRequest.getString("telNumber"));
+            addressEntity.setIs_default(jsonRequest.getInteger("is_default"));
+            System.out.println("运行到了这里 = " + "--------");
+        }
+
+        if (addressEntity.getId() == null || addressEntity.getId()==0){
+            addressEntity.setId(null);
+            addressService.save(addressEntity);
+        }else {
+            addressService.update(addressEntity);
+        }
+        return toResponsSuccess(addressEntity);
     }
+    /**
+     * 删除指定的收货地址
+     */
+    @PostMapping("delete")
+    public Object delete(@CurrentLoginUser UserVo loginUser){
+        JSONObject jsonRequest = getJsonRequest();
+        int id = jsonRequest.getIntValue("id");
+        System.out.println("loginUser.userId = " + loginUser.getUserId());
 
-   /* *//**
-     * 获取用户的收货地址
-     *//*
-    @PostMapping("/addresslist")
-    public Object getUserAddressList(){
+        AddressEntity addressEntity = addressService.queryObject(id);
 
-    }*/
+        if (!loginUser.getUserId().equals(addressEntity.getUserId())){
+            return toResponsObject(401,"无法删除","");
+        }
+        addressService.delete(id);
+        return toResponsSuccess("");
+    }
 }
