@@ -1,13 +1,16 @@
 package org.prado.interceptors;
 
 import org.apache.commons.lang.StringUtils;
+import org.prado.annotation.CurrentLoginUser;
 import org.prado.annotation.SkipAuth;
 import org.prado.common.ApiRRException;
 import org.prado.common.BaseController;
 import org.prado.entity.TokenEntity;
+import org.prado.entity.UserVo;
 import org.prado.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * @Author: houlintao
  * @Date:2020/7/2 下午1:33
@@ -71,5 +74,29 @@ public class AddressController extends BaseController {
         }
         addressService.delete(id);
         return toResponsSuccess("");
+    }
+
+    @PostMapping("/detail")
+    public Object detail(@CurrentLoginUser UserVo loginUser){
+        JSONObject jsonRequest = getJsonRequest();
+        int id = jsonRequest.getIntValue("id");
+        AddressEntity addressEntity = addressService.queryObject(id);
+
+        if (!addressEntity.getUserId().equals(loginUser.getUserId())){
+            return toResponsObject(403,"不是您的数据，您无权查看","");
+        }
+        return toResponsSuccess(addressEntity);
+    }
+
+    /**
+     * 获取此userId创建的所有收货地址
+     */
+    @PostMapping("list")
+    public Object AddressList(@CurrentLoginUser UserVo loginUser){
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("user_id",loginUser.getUserId());
+        List<AddressEntity> list = addressService.queryList(param);
+
+        return toResponsSuccess(list);
     }
 }
