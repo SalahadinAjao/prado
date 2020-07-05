@@ -11,4 +11,6 @@ public class Constants {
      * 登录验证码session key
      */
     public final static String DEFAULT_KAPTCHA_SESSION_KEY = "default_kaptcha_session_key";
+
+    public final static String DATE_FORMAT="yyyy-MM-dd HH:mm:ss";
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.prado.dao.ReceivingBookDao">
+    <resultMap id="receivingBookMap" type="org.prado.entity.ReceivingBookEntity">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="recorder" column="recorder"/>
+    </resultMap>
+
+    <update id="update" parameterType="org.prado.entity.ReceivingBookEntity">
+        update ReceivingBook
+        <set>
+            <if test="userId != null">`user_id`= #{userId},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="title != null">`title` = #{title},</if>
+            <if test="createDate != null">`create_date` = #{createDate},</if>
+            <if test="updateDate != null">`update_date` = #{updateDate},</if>
+            <if test="recorder != null">`recorder` = #{recorder}</if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="queryByDate" parameterType="String" resultMap="receivingBookMap">
+        select * from ReceivingBook where create_date = #{value}
+    </select>
+
+    <insert id="save" parameterType="org.prado.entity.ReceivingBookEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into ReceivingBook(
+        `user_id`,
+        `type`,
+        `title`,
+        `create_date`,
+        `update_date`,
+        `recorder`
+        )values (
+        #{userId},
+        #{type},
+        #{title},
+        #{createDate},
+        #{updateDate},
+        #{recorder}
+        )
+    </insert>
+</mapper>
