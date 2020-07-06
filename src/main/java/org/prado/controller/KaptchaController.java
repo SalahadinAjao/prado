@@ -41,6 +41,9 @@ public class KaptchaController extends BaseController {
 
         //生成验证码文字
         String text = producer.createText();
+
+        System.out.println("request = " + request + ", response = " + response);
+        System.out.println("生成的验证码文字 = " +text);
         //将验证码编码成图片
         BufferedImage image = producer.createImage(text);
         //输出验证码PNG格式图片

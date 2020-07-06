@@ -1,18 +1,14 @@
 package org.prado.controller;
 
 import org.prado.common.BaseController;
+import org.prado.common.Constants;
 import org.prado.common.Md5;
-import org.prado.dao.AddressDao;
-import org.prado.dao.TokenDao;
-import org.prado.dao.UserDao;
-import org.prado.dao.UserLevelDao;
-import org.prado.entity.AddressEntity;
-import org.prado.entity.TokenEntity;
-import org.prado.entity.UserLevelEntity;
-import org.prado.entity.UserVo;
+import org.prado.dao.*;
+import org.prado.entity.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -29,9 +25,19 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
-        AddressDao addressDao = applicationContext.getBean(AddressDao.class);
-        int total = addressDao.queryTotal();
-        System.out.println("total = " + total+"----------------------"+"\n");
+        ChuLiRecordDao chuLiRecordDao = applicationContext.getBean(ChuLiRecordDao.class);
+        BigDecimal money = chuLiRecordDao.sumMoney(4);
+        System.out.println("目前收礼总金额 = " + money.toString()+"元");
+        /*ChuLiRecordEntity entity = new ChuLiRecordEntity();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
+        String format = dateFormat.format(new Date());
+        entity.setChuliDate(format);
+        entity.setChuliMoney(new BigDecimal(100));
+        entity.setChuliName("李洪章");
+        entity.setGift("果子3斤，10斤鸡蛋");
+        entity.setReceivingbookentityId(4);
+
+        chuLiRecordDao.save(entity);*/
         /*AddressEntity entity = addressDao.queryObject(14);
         System.out.println("userName = " + entity.getUserName());
 
@@ -44,14 +50,7 @@ public class Test {
         addressEntity.setCountyName("湖州区");*/
 
        // addressDao.save(addressEntity);
-        Integer[] integers = new Integer[5];
-        List<Integer> list = Arrays.asList(integers);
-        list.add(5,0);
-        list.add(6,1);
-        list.add(7,2);
-        list.add(8,3);
-        Object[] array = list.toArray();
-        addressDao.deleteBatch(array);
+
 
 
        /* //TokenEntity tokenEntity = tokenDao.queryByUserId(31L);

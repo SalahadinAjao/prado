@@ -30,14 +30,14 @@ public class ReceivingBookController extends BaseController {
     @PostMapping("/create")
     public Object createBook(@CurrentLoginUser UserVo loginUser){
         JSONObject jsonRequest = getJsonRequest();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
 
         String createDate = dateFormat.format(date);
         Long userId = loginUser.getUserId();
         int type = jsonRequest.getIntValue("type");
-        String recorder = jsonRequest.getString("recorder");
         String title = jsonRequest.getString("title");
+        String recorder = loginUser.getUsername();
 
         //判断此entity是不是新的，为保证唯一性使用日期查询
         ReceivingBookEntity receivingBookEntity = receivingBookService.queryByDate(createDate);
@@ -60,6 +60,6 @@ public class ReceivingBookController extends BaseController {
 
             receivingBookService.update(receivingBookEntity);
         }
-            return toResponsSuccess("新建礼簿成功！现在可以使用了");
+            return toResponsSuccess("新建账本成功!");
     }
 }

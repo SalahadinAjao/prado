@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.prado.dao.ChuLiRecordDao">
+    <resultMap id="chuliRecordMap" type="org.prado.entity.ChuLiRecordEntity">
+        <result property="id" column="id"/>
+        <result property="receivingbookentityId" column="receivingbookentity_id"/>
+        <result property="chuliName" column="chuli_name"/>
+        <result property="chuliMoney" column="chuli_money"/>
+        <result property="gift" column="gift"/>
+        <result property="chuliDate" column="chuli_date"/>
+    </resultMap>
+
+    <insert id="save" parameterType="org.prado.entity.ChuLiRecordEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into Chuli_record(
+        `receivingbookentity_id`,
+        `chuli_name`,
+        `chuli_money`,
+        `gift`,
+        `chuli_date`
+        )values (
+        #{receivingbookentityId},
+        #{chuliName},
+        #{chuliMoney},
+        #{gift},
+        #{chuliDate}
+        )
+    </insert>
+
+    <select id="sumMoney" resultType="BigDecimal" parameterType="long">
+        select sum(chuli_money) from Chuli_record where receivingbookentity_id = #{value}
+    </select>
+
+    <select id="queryByName" resultMap="chuliRecordMap">
+        select * from Chuli_record where `chuli_name` = #{value}
+    </select>
+</mapper>
